@@ -1,13 +1,17 @@
-const { createServer } = require('express-unpkg');
+const express = require('express');
+const { createRequestHandler } = require('express-unpkg');
 
 const REPO_URL = 'https://registry.npm.taobao.org';
+const app = express();
 
-const server = createServer({
+const unpkg = createRequestHandler({
   registryURL: REPO_URL,
   autoIndex: true,
 });
 
+app.use(unpkg);
+
 const port = process.env.PORT || 8088;
-server.listen(port, function() {
+app.listen(port, function() {
   console.log(`Start server on port: ${port}`);
 });
