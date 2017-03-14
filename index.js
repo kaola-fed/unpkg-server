@@ -28,6 +28,10 @@ app.use(function(req, res, next) {
   res.status(403).send('403 Forbidden');
 });
 
+app.all('/', function(req, res) {
+  res.send('Ref: unpkg.com');
+});
+
 app.use(unpkg);
 
 const port = process.env.PORT || 8088;
