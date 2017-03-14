@@ -13,9 +13,9 @@ const unpkg = createRequestHandler({
 const isInWhiteList = function(referer) {
   if (!referer) return true;
   return [
-    /kaola\.com$/,
-    /netease\.com$/,
-    /163\.com$/,
+    /kaola\.com/,
+    /netease\.com/,
+    /163\.com/,
   ].some(function(d) {
     return d.test(referer);
   });
