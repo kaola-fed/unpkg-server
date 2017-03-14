@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/kaola-fed/unpkg-server#readme",
   "dependencies": {
-    "express-unpkg": "^1.0.0"
+    "express-unpkg": "^1.0.0",
+    "pm2": "^2.4.2"
   }
 }
