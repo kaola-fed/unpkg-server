@@ -1,6 +1,6 @@
 const pm2 = require('pm2');
 
-pm2.connect(function (err) {
+pm2.connect(true, function (err) {
   if (err) {
     console.error(err);
     process.exit(2);
