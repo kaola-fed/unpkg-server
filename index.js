@@ -1,5 +1,7 @@
 const ip = require('ip');
+const path = require('path');
 const express = require('express');
+const favicon = require('serve-favicon')
 const { createRequestHandler } = require('express-unpkg');
 
 const REPO_URL = 'https://registry.npm.taobao.org';
@@ -21,8 +23,11 @@ const isInWhiteList = function(referer) {
   });
 }
 
+app.use(favicon(path.join(__dirname, 'favicon.ico')));
+
 app.use(function(req, res, next) {
-  if (ip.isPrivate(req.ip)) return next();
+  const _ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  if (ip.isPrivate(_ip)) return next();
   if (isInWhiteList(req.get('Referer'))) return next();
 
   res.status(403).send('403 Forbidden');
