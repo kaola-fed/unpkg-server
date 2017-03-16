@@ -5,16 +5,14 @@ const express = require('express');
 const favicon = require('serve-favicon')
 const { createRequestHandler } = require('express-unpkg');
 
-const REPO_URL = process.env.REPO_URL || 'https://registry.npm.taobao.org';
 const app = express();
 
-app.use(cors());
-
 const unpkg = createRequestHandler({
-  registryURL: REPO_URL,
+  registryURL: process.env.REPO_URL,
   autoIndex: true,
 });
 
+app.use(cors());
 app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
 app.use(function(req, res, next) {
@@ -29,7 +27,6 @@ app.all('/', function(req, res) {
 
 app.use(unpkg);
 
-const port = process.env.PORT || 8088;
-app.listen(port, function() {
-  console.log(`Start server on port: ${port}`);
+app.listen(process.env.PORT, function() {
+  console.log(`Start server on port: ${process.env.PORT}`);
 });
