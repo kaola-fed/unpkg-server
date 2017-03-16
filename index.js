@@ -4,7 +4,7 @@ const express = require('express');
 const favicon = require('serve-favicon')
 const { createRequestHandler } = require('express-unpkg');
 
-const REPO_URL = 'https://registry.npm.taobao.org';
+const REPO_URL = process.env.REPO_URL || 'https://registry.npm.taobao.org';
 const app = express();
 
 app.use(cors());
