@@ -1,3 +1,4 @@
+// Usage: node app.js <PORT> <REPO>
 const path = require('path');
 const cors = require('cors');
 const url = require('url');
@@ -7,7 +8,9 @@ const { createRequestHandler } = require('express-unpkg');
 
 const app = express();
 
-const REPO = process.env.REPO || 'https://registry.npm.taobao.org';
+console.log(process.argv)
+
+const REPO = process.argv[3] || 'https://registry.npm.taobao.org';
 console.log(`Use repo: ${REPO}`);
 const unpkg = createRequestHandler({
   registryURL: REPO,
@@ -29,7 +32,7 @@ app.all('/', function(req, res) {
 
 app.use(unpkg);
 
-const port = process.env.PORT || 8088;
+const port = process.argv[2] || 8088;
 app.listen(port, function() {
   console.log(`Start server on port: ${port}`);
 });
