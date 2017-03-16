@@ -30,7 +30,8 @@ app.use(function(req, res, next) {
   if (ip.isPrivate(_ip)) return next();
   if (isInWhiteList(req.get('Referer'))) return next();
 
-  res.status(403).send('403 Forbidden');
+  //res.status(403).send('403 Forbidden');
+  return next();
 });
 
 app.all('/', function(req, res) {
