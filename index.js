@@ -1,11 +1,14 @@
 const ip = require('ip');
 const path = require('path');
+const cors = require('cors');
 const express = require('express');
 const favicon = require('serve-favicon')
 const { createRequestHandler } = require('express-unpkg');
 
 const REPO_URL = 'https://registry.npm.taobao.org';
 const app = express();
+
+app.use(cors());
 
 const unpkg = createRequestHandler({
   registryURL: REPO_URL,

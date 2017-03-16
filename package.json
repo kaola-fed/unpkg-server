@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/kaola-fed/unpkg-server#readme",
   "dependencies": {
+    "cors": "^2.8.1",
     "express": "^4.15.2",
     "express-unpkg": "^1.0.0",
     "ip": "^1.1.5",
