@@ -8,8 +8,6 @@ const { createRequestHandler } = require('express-unpkg');
 
 const app = express();
 
-console.log(process.argv)
-
 const REPO = process.argv[3] || 'https://registry.npm.taobao.org';
 console.log(`Use repo: ${REPO}`);
 const unpkg = createRequestHandler({
