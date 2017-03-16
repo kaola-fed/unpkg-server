@@ -7,8 +7,10 @@ const { createRequestHandler } = require('express-unpkg');
 
 const app = express();
 
+const REPO = process.env.REPO || 'https://registry.npm.taobao.org';
+console.log(`Use repo: ${REPO}`);
 const unpkg = createRequestHandler({
-  registryURL: process.env.REPO_URL,
+  registryURL: REPO,
   autoIndex: true,
 });
 
@@ -27,6 +29,7 @@ app.all('/', function(req, res) {
 
 app.use(unpkg);
 
-app.listen(process.env.PORT, function() {
-  console.log(`Start server on port: ${process.env.PORT}`);
+const port = process.env.PORT || 8088;
+app.listen(port, function() {
+  console.log(`Start server on port: ${port}`);
 });
