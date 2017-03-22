@@ -45,7 +45,7 @@ const insertTask = function(event) {
     project: event.project.name,
     branch: event.project.default_branch,
   }, function(err, newTask) {
-    err && log.red(err);
+    if (err) return log.red(err);
     log.green(`Insert new task: ${JSON.stringify(newTask)}`);
   });
 }
@@ -53,8 +53,7 @@ const insertTask = function(event) {
 module.exports = {
   set: function(event) {
     if (event.object_kind !== 'push') {
-      log.red(`Wrong event: ${JSON.stringify(event)}`);
-      return;
+      return log.red(`Wrong event: ${JSON.stringify(event)}`);
     }
 
     isExist(event).then(function(exist) {
@@ -68,8 +67,7 @@ module.exports = {
 
   get: function(callback) {
     db.find({}).exec(function(err, tasks) {
-      // TODO: Clean DB after querying
-      // db.remove({}, { multi: true });
+      db.remove({}, { multi: true });
       err && log.red(err);
       callback(err, tasks);
     })
