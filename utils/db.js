@@ -23,7 +23,7 @@ const isExist = function(event) {
 
 const updateTask = function(event) {
   const project = event.project.name;
-  const branch = event.project.default_branch;
+  const branch = event.ref.split('/')[2];
 
   db.update({ project, branch }, {
     $set: {
@@ -43,7 +43,7 @@ const insertTask = function(event) {
     email: event.user_email,
     sha: event.checkout_sha,
     project: event.project.name,
-    branch: event.project.default_branch,
+    branch: event.ref.split('/')[2],
   }, function(err, newTask) {
     if (err) return log.red(err);
     log.green(`Insert new task: ${JSON.stringify(newTask)}`);
