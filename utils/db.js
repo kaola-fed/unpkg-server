@@ -10,11 +10,11 @@ const db = new Datastore({
 });
 
 const isExist = function(event) {
+  const project = event.project.name;
+  const branch = event.ref.split('/')[2];
+
   return new Promise(function(resolve, reject) {
-    db.find({
-      project: event.project.name,
-      branch: event.project.default_branch,
-    }, function(err, docs) {
+    db.find({ project, branch }, function(err, docs) {
       if (err) return reject(err);
       resolve(docs && docs.length);
     })
