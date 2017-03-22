@@ -38,3 +38,5 @@ jspm_packages
 
 
 .pm2
+*.db
+test.json

@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/kaola-fed/unpkg-server#readme",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "cors": "^2.8.1",
     "express": "^4.15.2",
     "express-unpkg": "^1.0.0",
+    "nedb": "^1.8.0",
     "serve-favicon": "^2.4.1"
   }
 }

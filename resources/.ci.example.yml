@@ -1,0 +1,7 @@
+root: ./src/main/webapp
+
+node: 6
+
+scripts:
+ - npm install
+ - npm test
