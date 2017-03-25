@@ -23,7 +23,8 @@
     "cors": "^2.8.1",
     "express": "^4.15.2",
     "express-unpkg": "^1.0.0",
-    "nedb": "^1.8.0",
+    "mongoose": "^4.9.1",
+    "mongoose-delete": "^0.3.4",
     "serve-favicon": "^2.4.1"
   }
 }

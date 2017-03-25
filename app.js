@@ -1,4 +1,4 @@
-// Usage: node app.js <PORT> <REPO>
+// Usage: node app.js <PORT> <REPO> <DB_URI>
 const path = require('path');
 const cors = require('cors');
 const url = require('url');
