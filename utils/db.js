@@ -1,4 +1,3 @@
-const Datastore = require('nedb');
 const Logger = require('chalklog');
 const mongoose = require('mongoose');
 const softDelete = require('mongoose-delete');
@@ -20,12 +19,6 @@ TaskScheme.plugin(softDelete, { overrideMethods: true, deletedAt: true });
 
 const Task = mongoose.model('Task', TaskScheme);
 
-
-const db = new Datastore({
-  filename: 'task.db',
-  autoload: true,
-  timestampData: true,
-});
 
 const isExist = function(event) {
   const project = event.project.name;
