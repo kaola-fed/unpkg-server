@@ -4,7 +4,7 @@ const softDelete = require('mongoose-delete');
 
 const log = new Logger();
 
-const DB_URI = process.argv[4] || 'mongodb://127.0.0.1/citask';
+const DB_URI = process.argv[4] || 'mongodb://127.0.0.1/mktdb';
 mongoose.connect(DB_URI);
 
 const TaskScheme = new mongoose.Schema({
@@ -17,7 +17,7 @@ const TaskScheme = new mongoose.Schema({
 
 TaskScheme.plugin(softDelete, { overrideMethods: true, deletedAt: true });
 
-const Task = mongoose.model('Task', TaskScheme);
+const Task = mongoose.model('CITask', TaskScheme);
 
 
 const isExist = function(event) {
