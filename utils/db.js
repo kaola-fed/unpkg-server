@@ -13,6 +13,7 @@ const TaskScheme = new mongoose.Schema({
   sha: String,
   project: String,
   branch: String,
+  url: String,
 }, { timestamps: {} });
 
 TaskScheme.plugin(softDelete, { overrideMethods: true, deletedAt: true });
@@ -33,14 +34,18 @@ const isExist = function(event) {
 };
 
 const updateTask = function(event) {
+  const { commits } = event;
+
   const project = event.project.name;
   const branch = event.ref.split('/')[2];
+  const url = commits[commits.length - 1].url;
 
   Task.update({ project, branch }, {
     $set: {
       name: event.user_name,
       email: event.user_email,
       sha: event.checkout_sha,
+      url,
     },
   }, function(err) {
     if (err) return log.red(err);
@@ -49,12 +54,15 @@ const updateTask = function(event) {
 };
 
 const insertTask = function(event) {
+  const { commits } = event;
+
   const task = new Task({
     name: event.user_name,
     email: event.user_email,
     sha: event.checkout_sha,
     project: event.project.name,
     branch: event.ref.split('/')[2],
+    url: commits[commits.length - 1].url,
   });
   task.save(function(err, newTask) {
     if (err) return log.red(err);
