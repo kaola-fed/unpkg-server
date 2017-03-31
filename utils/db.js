@@ -13,7 +13,9 @@ const TaskScheme = new mongoose.Schema({
   sha: String,
   project: String,
   branch: String,
-  url: String,
+  commitUrl: String,
+  timestamp: Date,
+  sshUrl: String,
 }, { timestamps: {} });
 
 TaskScheme.plugin(softDelete, { overrideMethods: true, deletedAt: true });
@@ -38,14 +40,16 @@ const updateTask = function(event) {
 
   const project = event.project.name;
   const branch = event.ref.split('/')[2];
-  const url = commits[commits.length - 1].url;
+  const commitUrl = commits[commits.length - 1].url;
+  const timestamp = commits[commits.length - 1].timestamp;
 
   Task.update({ project, branch }, {
     $set: {
       name: event.user_name,
       email: event.user_email,
       sha: event.checkout_sha,
-      url,
+      commitUrl,
+      timestamp,
     },
   }, function(err) {
     if (err) return log.red(err);
@@ -62,7 +66,9 @@ const insertTask = function(event) {
     sha: event.checkout_sha,
     project: event.project.name,
     branch: event.ref.split('/')[2],
-    url: commits[commits.length - 1].url,
+    sshUrl: event.project.git_ssh_url,
+    commitUrl: commits[commits.length - 1].url,
+    timestamp: commits[commits.length - 1].timestamp,
   });
   task.save(function(err, newTask) {
     if (err) return log.red(err);
