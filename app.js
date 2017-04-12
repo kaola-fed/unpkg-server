@@ -1,18 +1,12 @@
-// Usage: node app.js <PORT> <REPO> <DB_URI> <CI_PASS>
+// Usage: node app.js <PORT> <REPO>
 const path = require('path');
 const cors = require('cors');
 const url = require('url');
 const express = require('express');
-const bodyParser = require('body-parser');
 const favicon = require('serve-favicon')
 const { createRequestHandler } = require('express-unpkg');
 
-const webhook = require('./middleware/webhook');
-
 const app = express();
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 const REPO = process.argv[3] || 'https://registry.npm.taobao.org';
 console.log(`Use repo: ${REPO}`);
@@ -33,8 +27,6 @@ app.use(function(req, res, next) {
 app.all('/', function(req, res) {
   res.send('Ref: unpkg.com');
 });
-
-app.use('/_webhook_', webhook);
 
 app.use(unpkg);
 
