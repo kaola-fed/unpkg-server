@@ -1,0 +1,1 @@
+exports.OFFICIAL_REGISTRY_URL = 'https://registry.npm.taobao.org';
