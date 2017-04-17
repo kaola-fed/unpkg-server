@@ -1,7 +1,7 @@
 const { createRequestHandler } = require('express-unpkg');
 const { OFFICIAL_REGISTRY_URL } = require('../config/consts')
-const { isScopedPackageRequest } = require('../helper/isScopedPackage');
-const { formatRegistryUrl } = require('../helper/formatRegistryUrl');
+const isScopedPackageRequest = require('../helper/isScopedPackage');
+const formatRegistryUrl = require('../helper/formatRegistryUrl');
 
 module.exports = function ({
     privateRegistryUrl

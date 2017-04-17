@@ -1,4 +1,6 @@
 // 顾名思义
-exports.isScopedPackageRequest = function (reqUrl) {
+function isScopedPackageRequest(reqUrl) {
     return reqUrl && reqUrl.startsWith && reqUrl.startsWith('/@');
 }
+
+module.exports = isScopedPackageRequest; 
