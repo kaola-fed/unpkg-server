@@ -8,6 +8,8 @@ const privateUnpkgService = require('./middleware/privateUnpkgService');
 const officialUnpkgService = require('./middleware/officialUnpkgService');
 
 const app = express();
+const port = process.argv[2] || 8088;
+const privateRegistryUrl = process.argv[3];
 
 app.use(cors());
 app.use(favicon(path.join(__dirname, 'favicon.ico')));
@@ -21,15 +23,13 @@ app.all('/', function(req, res) {
   res.send('Ref: unpkg.com');
 });
 
-if (process.argv[3]) {
+if (privateRegistryUrl) {
   app.use(privateUnpkgService({
-    privateRegistryUrl: process.argv[3]
+    privateRegistryUrl
   }));
 }
 
 app.use(officialUnpkgService());
-
-const port = process.argv[2] || 8088;
 
 app.listen(port, function() {
   console.log(`Start server on port: ${port}`);
